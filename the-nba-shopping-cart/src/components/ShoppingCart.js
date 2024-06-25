@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CartContext } from '../CartContext';
+import './ShoppingCart.css';
 
-const ShoppingCart = ({ itemCount }) => {
+const ShoppingCart = () => {
+  const { cartItems, setCartItems } = useContext(CartContext);
+  const itemCount = cartItems.reduce((count, item) => count + item.quantity, 0);
+
+  const handleCheckout = () => {
+    // For now, just clear the cart instead of handling checkout
+    setCartItems([]);
+  };
+
   return (
-    <div>
+    <div className="shopping-cart">
       <h1>Shopping Cart</h1>
       <p>Items in Cart: {itemCount}</p>
-      <button>Checkout</button>
+      <button onClick={handleCheckout}>Checkout</button>
     </div>
   );
 };

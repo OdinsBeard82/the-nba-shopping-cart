@@ -1,20 +1,25 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import ShopPage from './components/ShopPage';
+import ShoppingCart from './components/ShoppingCart';
 import Navbar from './components/Navbar';
+import { CartProvider, CartContext } from './CartContext';
 
 const App = () => {
+  const [cartItems, setCartItems] = useState([]);
+
   return (
-    <Router>
-      <div>
-        <Navbar itemCount={0} />
+    <CartContext.Provider value={{ cartItems, setCartItems }}>
+      <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
+          <Route path="/cart" element={<ShoppingCart />} />
         </Routes>
-      </div>
-    </Router>
+      </Router>
+    </CartContext.Provider>
   );
 };
 
