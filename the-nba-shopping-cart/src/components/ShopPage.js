@@ -25,14 +25,16 @@ const ShopPage = () => {
   }, []);
 
   const handleAddToCart = (product) => {
-    const existingItem = cartItems.find(item => item.id === product.id);
-    if (existingItem) {
-      setCartItems(cartItems.map(item =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      ));
+    const updatedCartItems = [...cartItems];
+    const itemIndex = updatedCartItems.findIndex((item) => item.id === product.id);
+
+    if (itemIndex > -1) {
+      updatedCartItems[itemIndex].quantity += 1;
     } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      updatedCartItems.push({ ...product, quantity: 1 });
     }
+
+    setCartItems(updatedCartItems);
   };
 
   if (loading) return <p>Loading products...</p>;

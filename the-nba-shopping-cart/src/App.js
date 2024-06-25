@@ -4,7 +4,7 @@ import HomePage from './components/HomePage';
 import ShopPage from './components/ShopPage';
 import ShoppingCart from './components/ShoppingCart';
 import Navbar from './components/Navbar';
-import { CartProvider, CartContext } from './CartContext';
+import { CartContext } from './CartContext';
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -24,3 +24,4 @@ const App = () => {
 };
 
 export default App;
+
